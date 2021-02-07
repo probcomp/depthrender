@@ -19,6 +19,7 @@ There is an example script that runs the rendering in the same process:
 ```
 python example.py
 ```
+(NOTE: this script writes a bunch of `.png` files to the current working directory)
 
 There is a second example script that requests the depth images from a depth image server.
 

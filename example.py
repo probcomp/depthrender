@@ -2,7 +2,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import time
 from depthrender.render import Renderer
-import tempfile
 
 width = 64
 height = 48
@@ -64,10 +63,11 @@ print("rendered %d depth images at %d fps" % (n,fps,))
 
 # save all the images
 print("writing depth images to disk")
-tmpdir = tempfile.gettempdir()
 for (i, img) in enumerate(depth_images):
     print(i)
     plt.figure()
     plt.imshow(img)
-    plt.savefig("%s/depth-%03d.png" % (tmpdir,i))
+    fname = "depth-%03d.png" % (i,)
+    print(fname)
+    plt.savefig(fname)
     plt.clf()
