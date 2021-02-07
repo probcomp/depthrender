@@ -17,12 +17,104 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='depthrender.proto',
   package='depthrender',
   syntax='proto3',
-  serialized_options=b'\n\033io.grpc.examples.helloworldB\017HelloWorldProtoP\001\242\002\003HLW',
+  serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x11\x64\x65pthrender.proto\x12\x0b\x64\x65pthrender\"k\n\x17RenderDepthImageRequest\x12\x14\n\x0cnum_vertices\x18\x01 \x01(\x05\x12\x15\n\rnum_triangles\x18\x02 \x01(\x05\x12\x10\n\x08vertices\x18\x03 \x01(\x0c\x12\x11\n\ttriangles\x18\x04 \x01(\x0c\"K\n\x15RenderDepthImageReply\x12\r\n\x05width\x18\x01 \x01(\x05\x12\x0e\n\x06height\x18\x02 \x01(\x05\x12\x13\n\x0b\x64\x65pth_image\x18\x03 \x01(\x0c\x32m\n\x0b\x44\x65pthRender\x12^\n\x10RenderDepthImage\x12$.depthrender.RenderDepthImageRequest\x1a\".depthrender.RenderDepthImageReply\"\x00\x42\x36\n\x1bio.grpc.examples.helloworldB\x0fHelloWorldProtoP\x01\xa2\x02\x03HLWb\x06proto3'
+  serialized_pb=b'\n\x11\x64\x65pthrender.proto\x12\x0b\x64\x65pthrender\"g\n\x16SetCameraParamsRequest\x12\r\n\x05width\x18\x01 \x01(\x05\x12\x0e\n\x06height\x18\x02 \x01(\x05\x12\n\n\x02\x66x\x18\x03 \x01(\x01\x12\n\n\x02\x66y\x18\x04 \x01(\x01\x12\n\n\x02\x63x\x18\x05 \x01(\x01\x12\n\n\x02\x63y\x18\x06 \x01(\x01\"\x16\n\x14SetCameraParamsReply\"k\n\x17RenderDepthImageRequest\x12\x14\n\x0cnum_vertices\x18\x01 \x01(\x05\x12\x15\n\rnum_triangles\x18\x02 \x01(\x05\x12\x10\n\x08vertices\x18\x03 \x01(\x0c\x12\x11\n\ttriangles\x18\x04 \x01(\x0c\",\n\x15RenderDepthImageReply\x12\x13\n\x0b\x64\x65pth_image\x18\x01 \x01(\x0c\x32\xca\x01\n\x0b\x44\x65pthRender\x12[\n\x0fSetCameraParams\x12#.depthrender.SetCameraParamsRequest\x1a!.depthrender.SetCameraParamsReply\"\x00\x12^\n\x10RenderDepthImage\x12$.depthrender.RenderDepthImageRequest\x1a\".depthrender.RenderDepthImageReply\"\x00\x62\x06proto3'
 )
 
 
+
+
+_SETCAMERAPARAMSREQUEST = _descriptor.Descriptor(
+  name='SetCameraParamsRequest',
+  full_name='depthrender.SetCameraParamsRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='width', full_name='depthrender.SetCameraParamsRequest.width', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='height', full_name='depthrender.SetCameraParamsRequest.height', index=1,
+      number=2, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='fx', full_name='depthrender.SetCameraParamsRequest.fx', index=2,
+      number=3, type=1, cpp_type=5, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='fy', full_name='depthrender.SetCameraParamsRequest.fy', index=3,
+      number=4, type=1, cpp_type=5, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='cx', full_name='depthrender.SetCameraParamsRequest.cx', index=4,
+      number=5, type=1, cpp_type=5, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='cy', full_name='depthrender.SetCameraParamsRequest.cy', index=5,
+      number=6, type=1, cpp_type=5, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=34,
+  serialized_end=137,
+)
+
+
+_SETCAMERAPARAMSREPLY = _descriptor.Descriptor(
+  name='SetCameraParamsReply',
+  full_name='depthrender.SetCameraParamsReply',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=139,
+  serialized_end=161,
+)
 
 
 _RENDERDEPTHIMAGEREQUEST = _descriptor.Descriptor(
@@ -73,8 +165,8 @@ _RENDERDEPTHIMAGEREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=34,
-  serialized_end=141,
+  serialized_start=163,
+  serialized_end=270,
 )
 
 
@@ -87,22 +179,8 @@ _RENDERDEPTHIMAGEREPLY = _descriptor.Descriptor(
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='width', full_name='depthrender.RenderDepthImageReply.width', index=0,
-      number=1, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='height', full_name='depthrender.RenderDepthImageReply.height', index=1,
-      number=2, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='depth_image', full_name='depthrender.RenderDepthImageReply.depth_image', index=2,
-      number=3, type=12, cpp_type=9, label=1,
+      name='depth_image', full_name='depthrender.RenderDepthImageReply.depth_image', index=0,
+      number=1, type=12, cpp_type=9, label=1,
       has_default_value=False, default_value=b"",
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -119,13 +197,29 @@ _RENDERDEPTHIMAGEREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=143,
-  serialized_end=218,
+  serialized_start=272,
+  serialized_end=316,
 )
 
+DESCRIPTOR.message_types_by_name['SetCameraParamsRequest'] = _SETCAMERAPARAMSREQUEST
+DESCRIPTOR.message_types_by_name['SetCameraParamsReply'] = _SETCAMERAPARAMSREPLY
 DESCRIPTOR.message_types_by_name['RenderDepthImageRequest'] = _RENDERDEPTHIMAGEREQUEST
 DESCRIPTOR.message_types_by_name['RenderDepthImageReply'] = _RENDERDEPTHIMAGEREPLY
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
+
+SetCameraParamsRequest = _reflection.GeneratedProtocolMessageType('SetCameraParamsRequest', (_message.Message,), {
+  'DESCRIPTOR' : _SETCAMERAPARAMSREQUEST,
+  '__module__' : 'depthrender_pb2'
+  # @@protoc_insertion_point(class_scope:depthrender.SetCameraParamsRequest)
+  })
+_sym_db.RegisterMessage(SetCameraParamsRequest)
+
+SetCameraParamsReply = _reflection.GeneratedProtocolMessageType('SetCameraParamsReply', (_message.Message,), {
+  'DESCRIPTOR' : _SETCAMERAPARAMSREPLY,
+  '__module__' : 'depthrender_pb2'
+  # @@protoc_insertion_point(class_scope:depthrender.SetCameraParamsReply)
+  })
+_sym_db.RegisterMessage(SetCameraParamsReply)
 
 RenderDepthImageRequest = _reflection.GeneratedProtocolMessageType('RenderDepthImageRequest', (_message.Message,), {
   'DESCRIPTOR' : _RENDERDEPTHIMAGEREQUEST,
@@ -142,7 +236,6 @@ RenderDepthImageReply = _reflection.GeneratedProtocolMessageType('RenderDepthIma
 _sym_db.RegisterMessage(RenderDepthImageReply)
 
 
-DESCRIPTOR._options = None
 
 _DEPTHRENDER = _descriptor.ServiceDescriptor(
   name='DepthRender',
@@ -151,13 +244,23 @@ _DEPTHRENDER = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=220,
-  serialized_end=329,
+  serialized_start=319,
+  serialized_end=521,
   methods=[
+  _descriptor.MethodDescriptor(
+    name='SetCameraParams',
+    full_name='depthrender.DepthRender.SetCameraParams',
+    index=0,
+    containing_service=None,
+    input_type=_SETCAMERAPARAMSREQUEST,
+    output_type=_SETCAMERAPARAMSREPLY,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
   _descriptor.MethodDescriptor(
     name='RenderDepthImage',
     full_name='depthrender.DepthRender.RenderDepthImage',
-    index=0,
+    index=1,
     containing_service=None,
     input_type=_RENDERDEPTHIMAGEREQUEST,
     output_type=_RENDERDEPTHIMAGEREPLY,

@@ -15,6 +15,11 @@ class DepthRenderStub(object):
         Args:
             channel: A grpc.Channel.
         """
+        self.SetCameraParams = channel.unary_unary(
+                '/depthrender.DepthRender/SetCameraParams',
+                request_serializer=depthrender__pb2.SetCameraParamsRequest.SerializeToString,
+                response_deserializer=depthrender__pb2.SetCameraParamsReply.FromString,
+                )
         self.RenderDepthImage = channel.unary_unary(
                 '/depthrender.DepthRender/RenderDepthImage',
                 request_serializer=depthrender__pb2.RenderDepthImageRequest.SerializeToString,
@@ -26,6 +31,12 @@ class DepthRenderServicer(object):
     """The greeting service definition.
     """
 
+    def SetCameraParams(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def RenderDepthImage(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -35,6 +46,11 @@ class DepthRenderServicer(object):
 
 def add_DepthRenderServicer_to_server(servicer, server):
     rpc_method_handlers = {
+            'SetCameraParams': grpc.unary_unary_rpc_method_handler(
+                    servicer.SetCameraParams,
+                    request_deserializer=depthrender__pb2.SetCameraParamsRequest.FromString,
+                    response_serializer=depthrender__pb2.SetCameraParamsReply.SerializeToString,
+            ),
             'RenderDepthImage': grpc.unary_unary_rpc_method_handler(
                     servicer.RenderDepthImage,
                     request_deserializer=depthrender__pb2.RenderDepthImageRequest.FromString,
@@ -50,6 +66,23 @@ def add_DepthRenderServicer_to_server(servicer, server):
 class DepthRender(object):
     """The greeting service definition.
     """
+
+    @staticmethod
+    def SetCameraParams(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/depthrender.DepthRender/SetCameraParams',
+            depthrender__pb2.SetCameraParamsRequest.SerializeToString,
+            depthrender__pb2.SetCameraParamsReply.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def RenderDepthImage(request,

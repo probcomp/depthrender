@@ -1,15 +1,23 @@
 syntax = "proto3";
 
-option java_multiple_files = true;
-option java_package = "io.grpc.examples.helloworld";
-option java_outer_classname = "HelloWorldProto";
-option objc_class_prefix = "HLW";
-
 package depthrender;
 
 // The greeting service definition.
 service DepthRender {
+  rpc SetCameraParams (SetCameraParamsRequest) returns (SetCameraParamsReply) {}
   rpc RenderDepthImage (RenderDepthImageRequest) returns (RenderDepthImageReply) {}
+}
+
+message SetCameraParamsRequest{
+  int32 width = 1;
+  int32 height = 2;
+  double fx = 3;
+  double fy = 4;
+  double cx = 5;
+  double cy = 6;
+}
+
+message SetCameraParamsReply {
 }
 
 message RenderDepthImageRequest{
@@ -20,7 +28,5 @@ message RenderDepthImageRequest{
 }
 
 message RenderDepthImageReply{
-  int32 width = 1;
-  int32 height = 2;
-  bytes depth_image = 3;
+  bytes depth_image = 1;
 }
