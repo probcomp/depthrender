@@ -1,26 +1,31 @@
-# depthrendersvc
-Code for a simple depth rendering microservice
+# depthrender
+Depth renderer with a simple numpy interface and associated [gRPC](https://grpc.io/) microservice.
 
-## Requirements
+## Installation
 
-Server requires `grpc` and `numpy` and `open3d`. For fast headless rendering with Open3D, install a version of `open3d` built according to [these instructions](http://www.open3d.org/docs/latest/tutorial/Advanced/headless_rendering.html).
+First, install a version of `open3d` built according to [these instructions](http://www.open3d.org/docs/latest/tutorial/Advanced/headless_rendering.html).
+In particular, be sure to run `make install-pip-package` with your project's Python virtual environment activated. 
 
-The client script uses `grpc` and `numpy`. (It also uses `matplotlib` to save the depth images to disk afterwards.)
-
-## To run it
-
-In one terminal, start the server:
+Then, with your environment still activated, run:
 ```
-python depthrender_server.py
+cd depthrender
+pip install .
 ```
 
-In another terminal, run the client:
+## Examples
+
+There is an example script that runs the rendering in the same process:
+```
+python example.py
+```
+
+There is a second example script that requests the depth images from a depth image server.
+
+First, start the server (it should be on your PATH if the Python virtual environment where `depthrender` was installed is activated):
+```
+depthserver
+```
+Then, in a separate terminal (with the Python virtual environment still activated), run:
 ```
 python depthrender_client.py
 ```
-
-## TODO
-
-- Package as a Python package
-
-- Make setting camera intrinsics part of the interface

@@ -44,8 +44,8 @@ fps = n / (time.time() - start)
 print("%d fps" % (fps,))
 
 # do it again, with new parameters
-width = 640
-height = 480
+width = 64
+height = 48
 fx = width/3.0
 fy = width/3.0
 cx = width/2.0

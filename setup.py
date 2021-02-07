@@ -29,7 +29,7 @@ setup(
     package_dir={'': 'src'},  # Optional
     packages=find_packages(where='src'),  # Required
     python_requires='>=3.6, <4',
-    install_requires=['numpy', 'open3d', 'grpcio'],  # Optional
+    install_requires=['numpy', 'open3d', 'grpcio', 'protobuf'],  # Optional
     extras_require={  # Optional
         'dev': ['check-manifest'],
         'test': ['coverage'],
