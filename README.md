@@ -27,5 +27,5 @@ depthserver
 ```
 Then, in a separate terminal (with the Python virtual environment still activated), run:
 ```
-python depthrender_client.py
+python example_client.py
 ```
