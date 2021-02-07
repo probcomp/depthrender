@@ -6,13 +6,9 @@ import matplotlib.pyplot as plt
 import time
 
 import grpc
-import depthrender_pb2
-import depthrender_pb2_grpc
-
-num_vertices = 300
-num_triangles = 100
-vertices = np.random.rand(num_vertices, 3)
-triangles = np.random.randint(0, num_vertices, (num_triangles, 3))
+from depthrender.depthrender_pb2 import SetCameraParamsRequest
+from depthrender.depthrender_pb2 import RenderDepthImageRequest
+from depthrender.depthrender_pb2_grpc import DepthRenderStub
 
 def R(angle):
     return np.transpose(np.array([
@@ -20,41 +16,48 @@ def R(angle):
         [-np.sin(angle), np.cos(angle), 0.0],
         [0.0, 0.0, 1.0]]))
 
+vertices = np.array([
+        [-0.25, -0.25, 1],
+        [0.25, -0.25, 1],
+        [0.0, 0.25, 1],
+        [-1, -1, 2],
+        [1, -1, 2],
+        [0, 1, 2]])
+
+triangles = np.array([
+        [0, 1, 2],
+        [3, 4, 5]])
+
 def run():
     depth_images = []
     with grpc.insecure_channel('localhost:50051') as channel:
-        stub = depthrender_pb2_grpc.DepthRenderStub(channel)
+        stub = DepthRenderStub(channel)
         start = time.time()
-        n = 1000
-        period = 100.0
+        n = 100
+        period = 20.0
 
         # set params
-        width = 640
-        height = 480
+        width = 64
+        height = 48
         fx = width/3.0
         fy = width/3.0
         cx = width/2.0
         cy = height/2.0
-        response = stub.SetCameraParams(depthrender_pb2.SetCameraParamsRequest(
+        response = stub.SetCameraParams(SetCameraParamsRequest(
             width=width, height=height,
             fx=fx, fy=fy,
             cx=cx, cy=cy))
         
         for i in range(n):
-            print(i)
             t = time.time() - start
             angle = i * 2 * 3.1415926 / period
-
-            num_vertices = np.random.randint(300, 900)
-            num_triangles = np.random.randint(100, 200)
-            vertices = np.random.rand(num_vertices, 3)
-            vertices[:,0:2] = 0.5 * (vertices[:,0:2] - 0.5)
-            vertices[:,2] = (vertices[:,2] * 0.5) + 1.0 # in front of camera
-            triangles = np.random.randint(0, num_vertices, (num_triangles, 3))
-            response = stub.RenderDepthImage(depthrender_pb2.RenderDepthImageRequest(
+            rotated_vertices = np.matmul(vertices, np.transpose(R(angle)))
+            num_vertices = vertices.shape[0]
+            num_triangles = triangles.shape[0]
+            response = stub.RenderDepthImage(RenderDepthImageRequest(
                 num_vertices=num_vertices,
                 num_triangles=num_triangles,
-                vertices=vertices.tobytes(),
+                vertices=rotated_vertices.tobytes(),
                 triangles=triangles.tobytes()))
             depth_image = np.reshape(np.frombuffer(response.depth_image, dtype=np.float32), (height, width))
             depth_images.append(depth_image)

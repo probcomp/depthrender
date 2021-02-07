@@ -22,6 +22,7 @@ def new_vis(width, height, fx, fy, cx, cy):
     # since adding the geometry changes the camera params
     # (even with reset_bounding_box=False -- I should file a bug for that)
     vis.add_geometry(mesh)
+    vis.get_render_option().mesh_show_back_face = True
     view = vis.get_view_control()
     camera = o3d.camera.PinholeCameraParameters()
     camera.extrinsic = np.eye(4)
@@ -40,6 +41,7 @@ class Renderer(object):
         
     def set_camera_params(self, width, height, fx, fy, cx, cy):
         if self.vis is not None:
+            print("destroying window..")
             self.vis.destroy_window()
         self.vis, self.mesh = new_vis(width, height, fx, fy, cx, cy)
 

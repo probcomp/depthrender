@@ -3,17 +3,17 @@ import logging
 
 import time
 import numpy as np
-import render
+from depthrender.render import Renderer
 
 import grpc
-import depthrender_pb2
-import depthrender_pb2_grpc
+from depthrender import depthrender_pb2
+from depthrender import depthrender_pb2_grpc
 
 class DepthRendererServer(depthrender_pb2_grpc.DepthRenderServicer):
 
     def __init__(self):
         super().__init__()
-        self.renderer = render.Renderer()
+        self.renderer = Renderer()
 
     def SetCameraParams(self, request, context):
         width = request.width
@@ -47,6 +47,6 @@ def serve():
     server.wait_for_termination()
     renderer.destroy_window()
 
-if __name__ == '__main__':
+def main():
     logging.basicConfig()
     serve()

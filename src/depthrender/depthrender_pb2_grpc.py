@@ -2,7 +2,7 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-import depthrender_pb2 as depthrender__pb2
+import depthrender.depthrender_pb2 as depthrender__pb2
 
 
 class DepthRenderStub(object):
