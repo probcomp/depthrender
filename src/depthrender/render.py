@@ -14,13 +14,13 @@ def initialize_mesh():
         o3d.utility.Vector3iVector(triangles))
     return mesh
 
-def new_vis(width, height, fx, fy, cx, cy):
+def make_new_open3d_vis(width, height, fx, fy, cx, cy):
     vis = o3d.visualization.Visualizer()
-    vis.create_window(width=width, height=height)
+    vis.create_window(width=width, height=height, visible=False)
     mesh = initialize_mesh()
     # NOTE: we need to add the geometry to the vis before setting camera
     # since adding the geometry changes the camera params
-    # (even with reset_bounding_box=False -- I should file a bug for that)
+    # (even with reset_bounding_box=False -- TODO file a bug report with open3d)
     vis.add_geometry(mesh)
     vis.get_render_option().mesh_show_back_face = True
     view = vis.get_view_control()
@@ -38,16 +38,21 @@ class Renderer(object):
     def __init__(self):
         self.vis = None
         self.mesh = None
-        
-    def set_camera_params(self, width, height, fx, fy, cx, cy):
-        if self.vis is not None:
-            print("destroying window..")
-            self.vis.destroy_window()
-        self.vis, self.mesh = new_vis(width, height, fx, fy, cx, cy)
 
+    def set_camera_params(self, width, height, fx, fy, cx, cy):
+        if not self.vis is None:
+            self.vis.destroy_window()
+            # setting self.vis = None is actually required to avoid 'GLFW not initialized errors'
+            # when using open3d built to use OSMesa. TODO: file a bug report with open3d
+            self.vis = None 
+            self.mesh = None
+        new_vis, new_mesh = make_new_open3d_vis(width, height, fx, fy, cx, cy)
+        self.vis = new_vis
+        self.mesh = new_mesh
+        
     def render(self, vertices, triangles):
         if self.vis is None:
-            raise RuntimeError("camera parameters not set; use set_camera_params")
+            raise RuntimeError("camera parameters not yet set")
         if (not isinstance(vertices, np.ndarray) or
             vertices.ndim != 2 or
             vertices.shape[1] != 3):
@@ -63,3 +68,9 @@ class Renderer(object):
         depth_image = np.asarray(depth_image)
         assert depth_image.dtype == np.float32
         return depth_image
+
+    def destroy(self):
+        if self.vis is not None:
+            self.vis.destroy_window()
+            self.vis = None
+            self.mesh = None

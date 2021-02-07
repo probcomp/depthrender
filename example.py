@@ -43,6 +43,25 @@ for i in range(n):
 fps = n / (time.time() - start)
 print("%d fps" % (fps,))
 
+# do it again, with new parameters
+width = 640
+height = 480
+fx = width/3.0
+fy = width/3.0
+cx = width/2.0
+cy = height/2.0
+renderer.set_camera_params(width, height, fx, fy, cx, cy)
+period = 20.0
+start = time.time()
+n = 10
+for i in range(n):
+    angle = i*2*3.1415926/period
+    vertices = np.matmul(original_vertices, np.transpose(R(angle)))
+    depth_image = renderer.render(vertices, triangles)
+    depth_images.append(depth_image)
+fps = n / (time.time() - start)
+print("%d fps" % (fps,))
+
 for (i, img) in enumerate(depth_images):
     print(i)
     plt.figure()

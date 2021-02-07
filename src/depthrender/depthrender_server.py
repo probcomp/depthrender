@@ -9,7 +9,7 @@ import grpc
 from depthrender import depthrender_pb2
 from depthrender import depthrender_pb2_grpc
 
-class DepthRendererServer(depthrender_pb2_grpc.DepthRenderServicer):
+class Server(depthrender_pb2_grpc.DepthRenderServicer):
 
     def __init__(self):
         super().__init__()
@@ -38,14 +38,18 @@ class DepthRendererServer(depthrender_pb2_grpc.DepthRenderServicer):
         return depthrender_pb2.RenderDepthImageReply(
             depth_image=depth_image.tobytes())
 
+    def destroy_renderer(self):
+        self.renderer.destroy()
+
 def serve():
-    renderer = DepthRendererServer()
+    render_server = Server()
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
-    depthrender_pb2_grpc.add_DepthRenderServicer_to_server(renderer, server)
+    depthrender_pb2_grpc.add_DepthRenderServicer_to_server(render_server, server)
     server.add_insecure_port('[::]:50051')
     server.start()
     server.wait_for_termination()
-    renderer.destroy_window()
+    render.server.destroy_renderer()
+        
 
 def main():
     logging.basicConfig()
