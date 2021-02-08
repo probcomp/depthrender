@@ -11,9 +11,9 @@ from depthrender import depthrender_pb2_grpc
 
 class Server(depthrender_pb2_grpc.DepthRenderServicer):
 
-    def __init__(self):
+    def __init__(self, renderer):
         super().__init__()
-        self.renderer = Renderer()
+        self.renderer = renderer
 
     def SetCameraParams(self, request, context):
         width = request.width
@@ -38,17 +38,17 @@ class Server(depthrender_pb2_grpc.DepthRenderServicer):
         return depthrender_pb2.RenderDepthImageReply(
             depth_image=depth_image.tobytes())
 
-    def destroy_renderer(self):
-        self.renderer.destroy()
-
 def serve():
-    render_server = Server()
-    server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
+    renderer = Renderer()
+    render_server = Server(renderer)
+    # NOTE: needs to be only 1 worker thread; otherwise regular Open3D build
+    # (not OSMesa) crashes when there are multiple channels opened
+    server = grpc.server(futures.ThreadPoolExecutor(max_workers=1)) 
     depthrender_pb2_grpc.add_DepthRenderServicer_to_server(render_server, server)
     server.add_insecure_port('[::]:50051')
     server.start()
     server.wait_for_termination()
-    render.server.destroy_renderer()
+    renderer.destroy()
         
 
 def main():

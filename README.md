@@ -3,15 +3,16 @@ Depth renderer with a simple numpy interface and associated [gRPC](https://grpc.
 
 ## Installation
 
-First, install a version of `open3d` built according to [these instructions](http://www.open3d.org/docs/latest/tutorial/Advanced/headless_rendering.html).
-In particular, be sure to run `make install-pip-package` with your project's Python virtual environment activated. 
-This causes headless rendering (which is not bound by 60 FPS limit) to be used.
-
-Then, with your environment still activated, run:
+With your environment activated, run:
 ```
 cd depthrender
 pip install .
 ```
+
+When using the verison of `open3d` downloaded from PyPI, the frame rate for depth rendering will be limited to 60 frames per second (FPS).
+You can obtain much higher frame rates if you build Open3D according to [these instructions](http://www.open3d.org/docs/latest/tutorial/Advanced/headless_rendering.html).0
+In particular, build Open3D according to intsructions above and run `make install-pip-package` with your project's Python virtual environment activated. 
+This causes headless rendering (which is not bound by the 60 FPS limit) to be used.
 
 ## Examples
 
